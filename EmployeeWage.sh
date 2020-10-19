@@ -14,4 +14,4 @@ case $empCheck in
 		empHrs=0
 			;;
 esac
-salary=$(( $empHrs*$empRatePerHr ));
+salary=$(( $empHrs*$empRatePerHr ))
