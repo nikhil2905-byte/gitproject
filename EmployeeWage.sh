@@ -1,22 +1,28 @@
-#! /bin/bash -x
+#!/bin/bash -x
+# CONSTANTS
 isPartTime=1;
 isFullTime=2;
+maxHrsInMonth=10;
 empRatePerHr=20;
 numWorkingDays=20;
-for (( day=1; day<=$numWorkingDays; day++ ))
+#VARIABLES
+totalEmpHrs=0;
+totalWorkingDays=0;
+while [[ $totalEmpHrs -lt $maxHrsInMonth && $totalWorkingDays -lt $numWorkingDays ]]
 do
-	empCheck=$((RANDOM%3));
+	(( totalWorkingDays++ ))
+	empCheck=$(( $RANDOM%3 ));
 	case $empCheck in
-	$isFullTime)
+		$isFullTime)
 		empHrs=8
-			;;
-	$isPartTime)
+		;;
+		$isPartTime)
 		empHrs=4
-			;;
+		;;
 		*)
 		empHrs=0
-			;;
-esac
-salary=$(($empHrs*$empRatePerHr));
-totalSalary=$(($totalSalary+$salary));
+		;;
+	esac
+	totalEmpHrs=$(( $totalEmpHrs + $empHrs ))
 done
+totalSalary=$(( $totalEmpHrs*$empRatePerHr ));
